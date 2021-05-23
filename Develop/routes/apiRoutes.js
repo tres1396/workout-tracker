@@ -32,7 +32,7 @@ router.put("/api/workouts/:id", (req, res) => {
     });
 });
 
-router.post("/api/workouts", { body }, (res) => {
+router.post("/api/workouts", ({ body }, res) => {
   Workout.create(body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
