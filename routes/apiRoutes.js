@@ -18,12 +18,8 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-router.put("/api/workouts/:id", (req, res) => {
-  Workout.findOneAndUpdate(
-    { _id: req.params.id },
-    { $push: { exercises: req.body } },
-    { new: true }
-  )
+router.post("/api/workouts", ({ body }, res) => {
+  Workout.create(body)
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
@@ -32,8 +28,13 @@ router.put("/api/workouts/:id", (req, res) => {
     });
 });
 
-router.post("/api/workouts", ({ body }, res) => {
-  Workout.create(body)
+
+router.put("/api/workouts/:id", (req, res) => {
+  Workout.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { exercises: req.body } },
+    { new: true }
+  )
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
